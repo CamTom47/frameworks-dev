@@ -26,7 +26,7 @@
 
 .main-app {
 	background-color: theme.$primary-dark-200;
-	font-family: Manrope,sans-serif;
+	font-family: Manrope, sans-serif;
 }
 
 @media (min-width: theme.$breakpoint-mobile) and (max-width: 900px) {
@@ -43,7 +43,7 @@
 	// }
 }
 
-@media (min-width: 900px) and (max-width: theme.$breakpoint-laptop) {
+@media (min-width: 900px) {
 	// .background-white {
 	// 	box-sizing: border-box;
 	// 	display: flex;

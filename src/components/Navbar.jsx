@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import "../styles/components/Navbar.scss";
 
 const Navbar = () => {
 	// const [navbarHidden, setNavbarHidden] = useState(false);
 	const [lastScrollStop, setLastScrollStop] = useState(window.screenTop);
+	const [activeNav, setActiveNav] = useState("about");
 
 	const getWindowHeight = () => {
 		// if (lastScrollStop < window.scrollY) setNavbarHidden(true);
@@ -13,8 +14,14 @@ const Navbar = () => {
 	};
 	window.addEventListener("scroll", getWindowHeight);
 
+	console.log(window.location.pathname);
+
+	useEffect(() => {
+		setActiveNav(window.location.pathname.split("/")[1]);
+	}, [window.location.pathname]);
+
 	return (
-				// <div className={`navbar-container ${navbarHidden ? "hidden" : ""}`}> use to make navbar hide on scroll
+		// <div className={`navbar-container ${navbarHidden ? "hidden" : ""}`}> use to make navbar hide on scroll
 
 		<div className={`navbar-container`}>
 			<div className='navbar-content'>
@@ -22,14 +29,26 @@ const Navbar = () => {
 					<h2>Elaborate</h2>
 				</Link>
 				<div className='navbar-link-container'>
-					<Link reloadDocument scrollrestoration='true' className='navbar-link' to='/about'>
+					<Link
+						reloadDocument
+						scrollrestoration='true'
+						className={`navbar-link ${activeNav === "about" ? "active" : ""}`}
+						to='/about'>
 						About
 					</Link>
-					<Link reloadDocument scrollrestoration='true' className='navbar-link' to='/services'>
+					<Link
+						reloadDocument
+						scrollrestoration='true'
+						className={`navbar-link ${activeNav === "services" ? "active" : ""}`}
+						to='/services'>
 						Services
 					</Link>
 					{/* <Link to='/portfolio'>Case Studies</Link> */}
-					<Link reloadDocument scrollrestoration='true' className='navbar-link' to='/contact'>
+					<Link
+						reloadDocument
+						scrollrestoration='true'
+						className={`navbar-link ${activeNav === "contact" ? "active" : ""}`}
+						to='/contact'>
 						Contact
 					</Link>
 				</div>

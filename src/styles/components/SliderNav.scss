@@ -3,11 +3,11 @@
 @media (min-width: theme.$breakpoint-mobile) and (max-width: 900px) {
 }
 
-@media (min-width: 900px) and (max-width: theme.$breakpoint-laptop) {
+@media (min-width: 900px) {
 	.navslider-container {
 		box-sizing: border-box;
 		width: 100%;
-		border-radius: .5rem;
+		border-radius: 0.5rem;
 		background-color: theme.$primary-100;
 		box-shadow: 5px;
 		color: black;
@@ -21,9 +21,6 @@
 		color: theme.$primary-100;
 		padding: 0.5rem 2rem;
 		text-align: center;
-		
-
-		
 	}
 
 	.navcomponent {
@@ -31,13 +28,13 @@
 		color: white;
 		flex-shrink: 1;
 
-		&:hover{
-			color:white;
+		&:hover {
+			color: white;
 			// transition-duration: 80ms;
 		}
 		&.active {
 			padding: 0.5rem 1rem;
-			border-radius: .5rem;
+			border-radius: 0.5rem;
 			color: theme.$primary-dark-100;
 			outline: 1px solid theme.$primary-dark-100;
 		}

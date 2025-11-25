@@ -124,7 +124,7 @@ const Services = () => {
 					Not seeing what you're looking for? We're always looking to grow our skills set. Please feel free to contact
 					us to discuss.
 				</p>
-				<ButtonLink label='Contact Us' url='/contact' type='secondary' size='large' outline={true}></ButtonLink>
+				<ButtonLink label='Contact Us' url='/contact' type='secondary' size='large' dark={true}></ButtonLink>
 			</div>
 		</div>
 	);
