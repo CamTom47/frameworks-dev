@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
+import Mailgun from "mailgun.js";
+import FormData from "form-data";
+
 import ButtonPrimary from "../../components/ButtonPrimary.tsx";
 import "../../styles/forms.scss";
+
 const Contact = () => {
 	const [activeInput, setActiveInput] = useState(null);
 	const [firstName, setFirstname] = useState("");
@@ -48,10 +52,19 @@ const Contact = () => {
 		}
 	};
 
+	/**
+	 * Set the service form input field
+	 * @param {Event} e
+	 */
 	const handleServiceInput = (e) => {
 		setSelectedService(e.target.id);
 	};
 
+	/**
+	 * Form validation for number inputs
+	 * @param {number} value
+	 * @returns
+	 */
 	const handleNumberInput = (value) => {
 		//verify that the input is a number
 		const integer = new Number(value);
@@ -70,13 +83,50 @@ const Contact = () => {
 		<option value={subservice}>{subservice}</option>;
 	});
 
+	/**
+	 * Process the form information and send an email
+	 */
+	const sendFormSubmissionEmail = async () => {
+		const mailgun = new Mailgun(FormData);
+		const mg = mailgun.client({
+			username: "api",
+			key: 'test key',
+			// When you have an EU-domain, you must specify the endpoint:
+			// url: "https://api.eu.mailgun.net"
+		});
+		try {
+			const data = await mg.messages.create("sandbox459e38f8ec3441e8ae59a2e64b46b8e1.mailgun.org", {
+				from: "Mailgun Sandbox <postmaster@sandbox459e38f8ec3441e8ae59a2e64b46b8e1.mailgun.org>",
+				to: ["Cameron Thomas <cameront@frameworksdev.com>"],
+				subject: "Hello Cameron Thomas",
+				text: `Congratulations Cameron Thomas, you just sent an email with Mailgun! You are truly awesome!`,
+				text: `First Name: ${firstName} \n
+						Last Name: ${lastName} \n
+						Phone Number: ${number} \n
+						Preferred Email: ${email} \n
+						Company: ${companyName} \n
+						Project Details: ${projectDetails} \n
+						Requested Service: ${selectedService}`,
+			});
+
+			console.log(data); // logs response data
+		} catch (error) {
+			console.log(error); //logs any error
+		}
+	};
+
+	const handleFormSubmission = () => {
+		setFormStep("Complete");
+		sendFormSubmissionEmail();
+	};
+
 	return (
 		<div className='contact-page-container'>
 			{/* Contact Us Next Step Instructions */}
 			<div className='text-content'>
 				<div className='container-header'>
-					<h2>Contact Us</h2>
-					<p>For general inquiries and question please contact us at hello@elaboratedev.com</p>
+					<h2 className="page-header">Contact Us</h2>
+					<p>For general inquiries and question please contact us at hello@frameworksdev.com</p>
 				</div>
 				{/* General Inquiry Section */}
 				<form className='contact-form' action='submit'>
@@ -178,7 +228,7 @@ const Contact = () => {
 
 								<div className='input-container'>
 									<div className='form-button'>
-										<ButtonPrimary label='Next' type='primary' action={() => setFormStep("Project Details")} />
+										<ButtonPrimary label='Next' type='primary' dark={true} action={() => setFormStep("Project Details")} />
 									</div>
 								</div>
 							</div>
@@ -244,8 +294,8 @@ const Contact = () => {
 
 								<div className='input-container'>
 									<div className='form-row center'>
-										<ButtonPrimary label='Previous' type='primary' action={() => setFormStep("General Information")} />
-										<ButtonPrimary label='Submit' type='primary' action={() => setFormStep("Complete")} />
+										<ButtonPrimary label='Previous' type='primary' dark={true} action={() => setFormStep("General Information")} />
+										<ButtonPrimary label='Submit' type='primary' dark={true} action={handleFormSubmission} />
 									</div>
 								</div>
 							</div>

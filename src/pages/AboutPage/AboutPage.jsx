@@ -58,7 +58,7 @@ const AboutPage = () => {
 			</div>
 
 			<div className={`slider-container slider-stop`}>
-				<SliderNav navList={processArray}></SliderNav>
+				{/* <SliderNav navList={processArray}></SliderNav> */}
 			</div>
 			<div className='overflow-section'>
 				{/* Planning Section */}
