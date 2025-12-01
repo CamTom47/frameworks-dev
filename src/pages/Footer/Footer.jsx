@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import "../../styles/components/Footer.scss";
+import linkedInLogo from '../../assets/linkedIn/in-logo/InBug-White.png'
 
 const Footer = () => {
 	return (
@@ -7,7 +8,7 @@ const Footer = () => {
 			<div className='footer-content'>
 				<div className='contact-information'>
 					<p>hello@frameworksdev.com</p>
-					<img className='footer-image' src='src/assets/linkedIn/in-logo/InBug-White.png' />
+					<a href="linkedin.com/company/frameworks-development" className='footer-image' src={linkedInLogo} />
 				</div>
 				<div className='company-info'>
 					<p className='font-semibold text-xl'>Frameworks Development, LLC</p>

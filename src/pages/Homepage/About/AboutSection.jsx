@@ -1,4 +1,5 @@
 import ButtonLink from "../../../components/ButtonLink";
+import homepagePhoto from '../../../assets/photos/ales-nesetril-Im7lZjxeLhg-unsplash.jpg'
 
 const AboutSection = () => {
 	return (
@@ -18,7 +19,7 @@ const AboutSection = () => {
 				</div>
 			</div>
 			<div>
-				<img src='src/assets/photos/ales-nesetril-Im7lZjxeLhg-unsplash.jpg' alt='' />
+				<img src={homepagePhoto} alt='' />
 			</div>
 		</div>
 	);

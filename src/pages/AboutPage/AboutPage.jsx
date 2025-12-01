@@ -1,5 +1,12 @@
 import { faker } from "@faker-js/faker";
 import SliderNav from "../../components/SliderNav";
+import img1 from "../../assets/photos/business-man-working-late-office.jpg";
+import img2 from "../../assets/photos/colleagues-looking-tablet-discussing-new-ideas.jpg";
+import img3 from "../../assets/photos/couturier-adding-credit-card-online.jpg";
+import img4 from "../../assets/photos/smiling-asian-girl-barista-working-cafe-counter-processing-orders-using-pos-terminal-receiving.jpg";
+import img5 from "../../assets/photos/young-man-barista-coffee-shop.jpg";
+import img6 from "../../assets/photos/sdlc/7076118.jpg";
+
 import { useState } from "react";
 
 const AboutPage = () => {
@@ -16,8 +23,8 @@ const AboutPage = () => {
 					<div>
 						<h1 className='page-header'>About Us</h1>
 						<p className='header-content'>
-							<span>Elaborate Development</span> is a software development agency that focuses on building one of a kind, custom
-							software that meets the needs of <b>Individiual Clients</b>, <b> Start Ups</b>, and{" "}
+							<span>Elaborate Development</span> is a software development agency that focuses on building one of a
+							kind, custom software that meets the needs of <b>Individiual Clients</b>, <b> Start Ups</b>, and{" "}
 							<b>Small Businesses</b>. We specialize in many different services including:
 							<ul>
 								<li>Web Design</li>
@@ -28,38 +35,44 @@ const AboutPage = () => {
 						</p>
 					</div>
 					<div className='image-container'>
-						<img className='img-1' src='src/assets/photos/business-man-working-late-office.jpg' alt='' />
-						<img className='img-2' src='src/assets/photos/colleagues-looking-tablet-discussing-new-ideas.jpg' alt='' />
-						<img className='img-3' src='src/assets/photos/couturier-adding-credit-card-online.jpg' alt='' />
+						<img className='img-1' src={img1} alt='' />
+						<img className='img-2' src={img2} alt='' />
+						<img className='img-3' src={img3} alt='' />
 						<img
 							className='img-4'
-							src='src/assets/photos/smiling-asian-girl-barista-working-cafe-counter-processing-orders-using-pos-terminal-receiving.jpg'
+							src={img4}
 							alt=''
 						/>
-						<img className='img-5' src='src/assets/photos/young-man-barista-coffee-shop.jpg' alt='' />
+						<img className='img-5' src={img5} alt='' />
 					</div>
 				</div>
 				<div className='right'>
-					<img className='process-img' src='src/assets/photos/sdlc/7076118.jpg' alt='' />
+					<img className='process-img' src={img6} alt='' />
 					<div>
 						<h1 className='page-header'>The Process</h1>
 						<p className='header-content'>
 							Our development process is closely aligned with Software Development Life Cycle standards to ensure the
 							following:
 							<ul>
-								<li>Increased <span className="normal">transparency</span> for project stakeholders.</li>
-								<li><span className="normal">Reliable</span> estimation and schedule forecasting.</li>
-								<li><span className="normal">Streamlined</span> processes for development and customer satisfaction.</li>
-								<li>Allowance for project <span className="normal">flexibility</span> as development progresses.</li>
+								<li>
+									Increased <span className='normal'>transparency</span> for project stakeholders.
+								</li>
+								<li>
+									<span className='normal'>Reliable</span> estimation and schedule forecasting.
+								</li>
+								<li>
+									<span className='normal'>Streamlined</span> processes for development and customer satisfaction.
+								</li>
+								<li>
+									Allowance for project <span className='normal'>flexibility</span> as development progresses.
+								</li>
 							</ul>
 						</p>
 					</div>
 				</div>
 			</div>
 
-			<div className={`slider-container slider-stop`}>
-				{/* <SliderNav navList={processArray}></SliderNav> */}
-			</div>
+			<div className={`slider-container slider-stop`}>{/* <SliderNav navList={processArray}></SliderNav> */}</div>
 			<div className='overflow-section'>
 				{/* Planning Section */}
 				<div className='about-page-section'>
