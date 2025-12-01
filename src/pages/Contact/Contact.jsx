@@ -90,7 +90,7 @@ const Contact = () => {
 		const mailgun = new Mailgun(FormData);
 		const mg = mailgun.client({
 			username: "api",
-			key: 'test key',
+			key: import.meta.env.MAILGUN_API_KEY,
 			// When you have an EU-domain, you must specify the endpoint:
 			// url: "https://api.eu.mailgun.net"
 		});
