@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import Mailgun from "mailgun.js";
-import FormData from "form-data";
+
 
 import ButtonPrimary from "../../components/ButtonPrimary.tsx";
 import "../../styles/forms.scss";
@@ -87,32 +86,7 @@ const Contact = () => {
 	 * Process the form information and send an email
 	 */
 	const sendFormSubmissionEmail = async () => {
-		const mailgun = new Mailgun(FormData);
-		const mg = mailgun.client({
-			username: "api",
-			key: import.meta.env.MAILGUN_API_KEY,
-			// When you have an EU-domain, you must specify the endpoint:
-			// url: "https://api.eu.mailgun.net"
-		});
-		try {
-			const data = await mg.messages.create("sandbox459e38f8ec3441e8ae59a2e64b46b8e1.mailgun.org", {
-				from: "Mailgun Sandbox <postmaster@sandbox459e38f8ec3441e8ae59a2e64b46b8e1.mailgun.org>",
-				to: ["Cameron Thomas <cameront@frameworksdev.com>"],
-				subject: "Hello Cameron Thomas",
-				text: `Congratulations Cameron Thomas, you just sent an email with Mailgun! You are truly awesome!`,
-				text: `First Name: ${firstName} \n
-						Last Name: ${lastName} \n
-						Phone Number: ${number} \n
-						Preferred Email: ${email} \n
-						Company: ${companyName} \n
-						Project Details: ${projectDetails} \n
-						Requested Service: ${selectedService}`,
-			});
-
-			console.log(data); // logs response data
-		} catch (error) {
-			console.log(error); //logs any error
-		}
+		
 	};
 
 	const handleFormSubmission = () => {
