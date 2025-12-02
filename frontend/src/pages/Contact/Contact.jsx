@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import MessageAPI from "../../API/MessageAPI.js";
 
 import ButtonPrimary from "../../components/ButtonPrimary.tsx";
 import "../../styles/forms.scss";
@@ -15,6 +15,16 @@ const Contact = () => {
 	const [errorObject, setErrorObject] = useState({});
 	const [formStep, setFormStep] = useState(null);
 	const [selectedService, setSelectedService] = useState(["Select A Service"]);
+	const [formData, setFormData] = useState({
+		firstName: "",
+		lastName: "",
+		phoneNumber: "",
+		email: "",
+		companyName: "",
+		projectDetails: "",
+		selectedService: "",
+		projectPhase: "",
+	});
 
 	const handleInputClick = (e) => {
 		setActiveInput(e.target.id);
@@ -29,24 +39,31 @@ const Contact = () => {
 
 	const handleInput = (e) => {
 		const category = e.target.id;
+
 		switch (category) {
-			case "First Name":
-				setFirstname(e.target.value);
+			case "firstName":
+				setFormData({ ...formData, firstName: e.target.value });
 				break;
-			case "Last Name":
-				setLastname(e.target.value);
+			case "lastName":
+				setFormData({ ...formData, lastName: e.target.value });
 				break;
-			case "Email":
-				setEmail(e.target.value);
+			case "number":
+				setFormData({ ...formData, number: e.target.value });
 				break;
-			case "Phone Number":
-				handleNumberInput(e.target.value);
+			case "email":
+				setFormData({ ...formData, email: e.target.value });
 				break;
-			case "Project Details":
-				setProjectDetails(e.target.value);
+			case "companyName":
+				setFormData({ ...formData, companyName: e.target.value });
 				break;
-			case "input-company-name":
-				setCompanyName(e.target.value);
+			case "projectDetails":
+				setFormData({ ...formData, projectDetails: e.target.value });
+				break;
+			case "selectedService":
+				setFormData({ ...formData, selectedService: e.target.value });
+				break;
+			case "projectPhase":
+				setFormData({ ...formData, projectPhase: e.target.value });
 				break;
 		}
 	};
@@ -86,7 +103,7 @@ const Contact = () => {
 	 * Process the form information and send an email
 	 */
 	const sendFormSubmissionEmail = async () => {
-		
+		MessageAPI.processContactForm(formData);
 	};
 
 	const handleFormSubmission = () => {
@@ -99,7 +116,7 @@ const Contact = () => {
 			{/* Contact Us Next Step Instructions */}
 			<div className='text-content'>
 				<div className='container-header'>
-					<h2 className="page-header">Contact Us</h2>
+					<h2 className='page-header'>Contact Us</h2>
 					<p>For general inquiries and question please contact us at hello@frameworksdev.com</p>
 				</div>
 				{/* General Inquiry Section */}
@@ -132,12 +149,12 @@ const Contact = () => {
 												*First Name
 											</label>
 											<input
-												id='First Name'
+												id='firstName'
 												className='form-input'
 												type='text'
 												onClick={handleInputClick}
 												onChange={handleInput}
-												value={firstName}
+												value={formData.firstName}
 											/>
 										</div>
 										<div className='form-div'>
@@ -145,12 +162,12 @@ const Contact = () => {
 												*Last Name
 											</label>
 											<input
-												id='Last Name'
+												id='lastName'
 												className='form-input'
 												type='text'
 												onClick={handleInputClick}
 												onChange={handleInput}
-												value={lastName}
+												value={formData.lastName}
 											/>
 										</div>
 									</div>
@@ -161,12 +178,12 @@ const Contact = () => {
 												Phone Number
 											</label>
 											<input
-												id='Phone Number'
+												id='phoneNumber'
 												className='form-input'
 												type='text'
 												onClick={handleInputClick}
 												onChange={handleInput}
-												value={number}
+												value={formData.number}
 											/>
 											{errorObject.numberError && (
 												<span className='text-red-500'>{errorObject.numberError.message}</span>
@@ -178,23 +195,23 @@ const Contact = () => {
 												Company Name
 											</label>
 											<input
-												id='input-company-name'
+												id='companyName'
 												className='form-input'
 												type='text'
 												onClick={handleInputClick}
 												onChange={handleInput}
-												value={companyName}
+												value={formData.companyName}
 											/>
 										</div>
 									</div>
 									<div className='form-div'>
 										<label className={`form-label ${activeInput === "Email" || email ? "active" : ""} `}>*Email</label>
 										<input
-											id='Email'
+											id='email'
 											className='form-input'
 											type='text'
 											onClick={handleInputClick}
-											value={email}
+											value={formData.email}
 											onChange={handleInput}
 										/>
 									</div>
@@ -202,7 +219,12 @@ const Contact = () => {
 
 								<div className='input-container'>
 									<div className='form-button'>
-										<ButtonPrimary label='Next' type='primary' dark={true} action={() => setFormStep("Project Details")} />
+										<ButtonPrimary
+											label='Next'
+											type='primary'
+											dark={true}
+											action={() => setFormStep("Project Details")}
+										/>
 									</div>
 								</div>
 							</div>
@@ -240,9 +262,9 @@ const Contact = () => {
 									<div className='form-column'>
 										<div className='form-column'>
 											<label className='input-header' htmlFor=''>
-												Phase of Project
+												Service Needed
 											</label>
-											<select className='form-div select' name='' id=''>
+											<select className='form-div select' name='' id='selectedService'>
 												<option default> Select A Service</option>
 												{selectedService && subServiceComponents}
 											</select>
@@ -251,7 +273,7 @@ const Contact = () => {
 											<label className='input-header' htmlFor=''>
 												Phase Of Project
 											</label>
-											<select className='form-div select' name='' id=''>
+											<select className='form-div select' name='' id='projectPhase'>
 												<option default> Select A Phase</option>
 												<option value=''>Ideation</option>
 												<option value=''>Technical Documentation</option>
@@ -263,12 +285,17 @@ const Contact = () => {
 								</div>
 								<div className='text-area-container'>
 									<label className='input-header'>Additional Details</label>
-									<textarea className='input-textarea' name='' id=''></textarea>
+									<textarea className='input-textarea' name='' id='projectDetails'></textarea>
 								</div>
 
 								<div className='input-container'>
 									<div className='form-row center'>
-										<ButtonPrimary label='Previous' type='primary' dark={true} action={() => setFormStep("General Information")} />
+										<ButtonPrimary
+											label='Previous'
+											type='primary'
+											dark={true}
+											action={() => setFormStep("General Information")}
+										/>
 										<ButtonPrimary label='Submit' type='primary' dark={true} action={handleFormSubmission} />
 									</div>
 								</div>

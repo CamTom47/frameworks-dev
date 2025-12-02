@@ -30,8 +30,10 @@ router.post("/", async (req, res, next) => {
                     Requested Service: ${selectedService}`,
 		});
 
-		console.log(message);
-		return res.json({ message });
+		//if the message was send successfully;
+		if(message.status === 200){
+			return res.json({ message: "Your message has been sent and will be reviewed as soon as possible. Thank you!" });
+		}
 	} catch (err) {
 		console.error(`An error occured while trying to send your inquiry: ${err}`);
 		next(err);

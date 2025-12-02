@@ -13,9 +13,6 @@ const Navbar = () => {
 		setLastScrollStop(window.scrollY);
 	};
 	window.addEventListener("scroll", getWindowHeight);
-
-	console.log(window.location.pathname);
-
 	useEffect(() => {
 		setActiveNav(window.location.pathname.split("/")[1]);
 	}, [window.location.pathname]);
