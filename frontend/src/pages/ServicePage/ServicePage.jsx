@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import DropdownNav from "../../components/DropdownNav";
 import ServicePageCard from "../../components/ServicePageCard";
 import ButtonLink from "../../components/ButtonLink";
-import "../../styles/servicePage.scss";
 
 const Services = () => {
 	// const services = {

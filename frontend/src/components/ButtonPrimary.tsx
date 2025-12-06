@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/components/ButtonPrimary.scss";
 
 interface ButtonPrimaryProps {
 	label: string;

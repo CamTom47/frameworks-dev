@@ -1,6 +1,5 @@
 import React from "react";
 import { faker } from "@faker-js/faker";
-import "../styles/components/ServicePageCard.scss";
 interface ServicePageCardProps {
 	title: string;
 	content: string;

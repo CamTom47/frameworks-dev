@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router";
-import "../styles/components/ButtonLink.scss";
 
 interface ButtonLinkProps {
 	label: string;
@@ -26,9 +25,7 @@ const ButtonLink = ({
 			reloadDocument
 			scrollrestoration='true'
 			to={url}
-			className={`primary-button ${size} ${outline === true ? "outline" : ""} ${
-				dark === true ? "dark" : ""
-			}`}>
+			className="bg-primary font-semibold py-2 px-8 rounded-full text-black text-md shadow-md">
 			{label}
 		</Link>
 	);

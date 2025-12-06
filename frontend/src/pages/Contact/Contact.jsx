@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import MessageAPI from "../../API/MessageAPI.js";
 
 import ButtonPrimary from "../../components/ButtonPrimary.tsx";
-import "../../styles/forms.scss";
 
 const Contact = () => {
 	const [activeInput, setActiveInput] = useState(null);
