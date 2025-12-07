@@ -15,7 +15,7 @@ const Contact = () => {
 		email: "",
 		companyName: "",
 		projectDetails: "",
-		selectedServices: "",
+		selectedServices: selectedServices,
 		projectPhase: "",
 	});
 

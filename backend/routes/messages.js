@@ -6,8 +6,10 @@ import FormData from "form-data";
 
 router.post("/", async (req, res, next) => {
 	try {
-		const { firstName, lastName, number, email, companyName, projectDetails, selectedService } = req.body;
+		const { firstName, lastName, phoneNumber, email, companyName, projectDetails, selectedServices, projectPhase } = req.body;
+		console.log('req body' ,req.body)
 
+		console.log(selectedServices)
 		const mailgun = new Mailgun(FormData);
 		const mg = mailgun.client({
 			username: "api",
@@ -23,11 +25,12 @@ router.post("/", async (req, res, next) => {
 			text: `
                     First Name: ${firstName} \n
                     Last Name: ${lastName} \n
-                    Phone Number: ${number} \n
+                    Phone Number: ${phoneNumber} \n
                     Preferred Email: ${email} \n
                     Company: ${companyName} \n
                     Project Details: ${projectDetails} \n
-                    Requested Service: ${selectedService}`,
+                    Requested Service: ${selectedServices.length === 1 ? selectedServices[0] : selectedServices.join(',')} \n
+                    Project Phase: ${projectPhase}`,
 		});
 
 		//if the message was send successfully;

@@ -8,9 +8,19 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+      target: production
+    environment:
+      NODE_ENV: production
+    container_name: frameworks-server
+    ports:
+    - 3001:3001
   app-prod:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
       target: production
     environment:
