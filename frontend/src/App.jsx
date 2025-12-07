@@ -7,6 +7,7 @@ import ServicePage from "./pages/ServicePage/ServicePage";
 import Contact from "./pages/Contact/Contact";
 import { useEffect, useState } from "react";
 import "./App.css";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 				<Route path='/services' element={<ServicePage />} />
 				<Route path='/services/:service_id' element={<ServicePage />} />
 				<Route path='/contact' element={<Contact />} />
+				<Route path='/*' element={<NotFoundPage />} />
 			</Routes>
 		</div>
 	);
