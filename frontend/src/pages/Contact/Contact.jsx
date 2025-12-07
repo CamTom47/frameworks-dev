@@ -7,7 +7,7 @@ import ButtonPrimary from "../../components/ButtonPrimary.tsx";
 
 const Contact = () => {
 	const [formStep, setFormStep] = useState(null);
-	const [selectedServices, setSelectedServices] = useState([]);
+	const [selectedServices, setSelectedServices] = useState(['Web Design']);
 	const [formData, setFormData] = useState({
 		firstName: "",
 		lastName: "",
@@ -37,8 +37,8 @@ const Contact = () => {
 			case "lastName":
 				setFormData({ ...formData, lastName: e.target.value });
 				break;
-			case "number":
-				setFormData({ ...formData, number: e.target.value });
+			case "phoneNumber":
+				setFormData({ ...formData, phoneNumber: e.target.value });
 				break;
 			case "email":
 				setFormData({ ...formData, email: e.target.value });
@@ -50,8 +50,17 @@ const Contact = () => {
 				setFormData({ ...formData, projectDetails: e.target.value });
 				break;
 			case "checkbox":
-				if (e.target.checked) setSelectedServices(new Array(...selectedServices, e.target.value));
-				else setSelectedServices(selectedServices.filter((service) => service !== e.target.value));
+				if (e.target.checked) {
+					setSelectedServices(new Array(...selectedServices, e.target.value));
+
+					setFormData({ ...formData, selectedServices: new Array(...selectedServices, e.target.value) });
+				} else {
+					setSelectedServices(selectedServices.filter((service) => service !== e.target.value));
+					setFormData({
+						...formData,
+						selectedServices: selectedServices.filter((service) => service !== e.target.value),
+					});
+				}
 				break;
 			case "projectPhase":
 				setFormData({ ...formData, projectPhase: e.target.value });
@@ -63,7 +72,7 @@ const Contact = () => {
 		if (formStep === "General Information") setFormStep("Project Details");
 		else if (formStep === "Project Details") {
 			setFormStep("Complete");
-			// sendFormSubmissionEmail();
+			sendFormSubmissionEmail();
 		} else return;
 	};
 
@@ -150,7 +159,8 @@ const Contact = () => {
 										id='phoneNumber'
 										className='rounded-md w-full bg-white h-8 px-2'
 										type='text'
-										value={formData.number}
+										onChange={handleInput}
+										value={formData.phoneNumber}
 									/>
 								</div>
 								<div className='form-div'>
@@ -262,7 +272,9 @@ const Contact = () => {
 
 				{formStep === "Complete" && (
 					<div>
-						<p className="text-2xl text-center font-light">Your inquiry has been sent. Our team will review it and be in touch shortly!</p>
+						<p className='text-2xl text-center font-light'>
+							Your inquiry has been sent. Our team will review it and be in touch shortly!
+						</p>
 					</div>
 				)}
 			</form>
