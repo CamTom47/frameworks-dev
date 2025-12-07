@@ -13,9 +13,7 @@ const ButtonPrimary = ({ label, action, type, size, outline, dark }: ButtonPrima
 	return (
 		<button
 			onClick={action}
-			className={`primary-button ${type === "primary" ? "blue" : ""} ${size} ${outline === true ? "outline" : ""} ${
-				dark === true ? "dark" : ""
-			}`}>
+			className="bg-primary font-semibold py-2 px-8 rounded-full text-black text-md shadow-md hover:bg-white hover:outline-primary hover:outline duration-100 lg:w-60">
 			{label}
 		</button>
 	);

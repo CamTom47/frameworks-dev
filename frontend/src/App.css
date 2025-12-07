@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @font-face {
 	font-family: "Manrope";
@@ -25,16 +25,28 @@
 
 .main-app {
 	font-family: Reddit-Sans, sans-serif;
+	height: 100vh;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
-@theme{
-	--color-primary: #F27B35;
-	--color-primary-dark: #8C230B;
-	--color-secondary: #5F94D9;
-	--color-background: #FFE3D0;
-	--color-light-gray: #f2f2f2
+@theme {
+	--color-primary: #f27b35;
+	--color-primary-dark: #8c230b;
+	--color-secondary: #5f94d9;
+	--color-background: #ffe3d0;
+	--color-light-gray: #f2f2f2;
 
-	/* --breakpoint-xs: 30rem;
-	--breakpoint-2xl: 100rem;
-	--breakpoint-3xl: 120rem; */
+	--animate-opennav: opennav 100ms linear;
+
+
+	@keyframes opennav {
+		0% {
+			transform: scaleY(0);
+		}
+		100% {
+			transform: scaleY(100%);
+		}
+	}
+
 }

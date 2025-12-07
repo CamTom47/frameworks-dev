@@ -12,15 +12,13 @@ function App() {
 	return (
 		<div className='main-app'>
 			<Navbar></Navbar>
-			{/* <div className="overflow-y-scroll "> */}
-				<Routes>
-					<Route path='/' element={<Homepage />} />
-					<Route path='/about' element={<AboutPage />} />
-					<Route path='/services' element={<ServicePage />} />
-					<Route path='/services/:service_id' element={<ServicePage />} />
-					<Route path='/contact' element={<Contact />} />
-				</Routes>
-			{/* </div> */}
+			<Routes>
+				<Route path='/' element={<Homepage />} />
+				<Route path='/about' element={<AboutPage />} />
+				<Route path='/services' element={<ServicePage />} />
+				<Route path='/services/:service_id' element={<ServicePage />} />
+				<Route path='/contact' element={<Contact />} />
+			</Routes>
 		</div>
 	);
 }
