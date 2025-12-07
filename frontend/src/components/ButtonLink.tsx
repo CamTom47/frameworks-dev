@@ -25,7 +25,7 @@ const ButtonLink = ({
 			reloadDocument
 			scrollrestoration='true'
 			to={url}
-			className="bg-primary font-semibold py-2 px-8 rounded-full text-black text-md shadow-md hover:bg-white hover:outline-primary hover:outline duration-100 lg:w-60">
+			className="bg-primary font-semibold py-2 px-6 text-center rounded-full text-black text-sm shadow-md hover:bg-white hover:outline-primary hover:outline duration-100 lg:w-60">
 			{label}
 		</Link>
 	);
