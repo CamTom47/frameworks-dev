@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import ButtonPrimary from "../../components/ButtonPrimary.tsx";
 
 const Contact = () => {
-	const [errorObject, setErrorObject] = useState({});
 	const [formStep, setFormStep] = useState(null);
 	const [selectedServices, setSelectedServices] = useState([]);
 	const [formData, setFormData] = useState({
@@ -26,10 +25,6 @@ const Contact = () => {
 		formState: { errors },
 	} = useForm();
 
-	// const handleInputClick = (e) => {
-	// 	setActiveInput(e.target.id);
-	// };
-
 	const handleInput = (e) => {
 		let category = "";
 		if (e.target.id) category = e.target.id;
@@ -38,13 +33,9 @@ const Contact = () => {
 		switch (category) {
 			case "firstName":
 				setFormData({ ...formData, firstName: e.target.value });
-				// validateNameField("firstName", "First Name");
-
 				break;
 			case "lastName":
 				setFormData({ ...formData, lastName: e.target.value });
-				// validateNameField("lastName", "Last Name");
-
 				break;
 			case "number":
 				setFormData({ ...formData, number: e.target.value });
@@ -68,53 +59,12 @@ const Contact = () => {
 		}
 	};
 
-	const testSubmit = (data) => console.log(data);
-	/**
-	 * Set the service form input field
-	 * @param {Event} e
-	 */
-	// const handleServiceInput = (e) => {
-	// 	setSelectedServices(e.target.id);
-	// };
-
-	/**
-	 * Form validation for number inputs
-	 * @param {e} e
-	 * @returns
-	 */
-	const handleNumberInput = (e) => {
-		//verify that the input is a number
-		// console.log(e.target.value)
-		// console.log(+e.target.value)
-		// if (new Number(+e.target.value)) console.log(e.target.value);
-		// if(e.charcode)
-		// if (isNaN(integer)) {
-		// 	errorObject.numberError = {
-		// 		message: "Input must be a number",
-		// 	};
-		// 	setErrorObject(errorObject);
-		// } else {
-		// 	handle(e);
-		// }
-		// return;
-	};
-
-	// const validateNameField = (field, formattedField) => {
-	// 	console.log("field", field);
-	// 	console.debug("content", formData[field]);
-	// 	if (!formData[field].length > 0) {
-	// 		console.error("error!");
-	// 		setErrorObject(new Object({...errorObject, field: `${formattedField} is required` }));
-	// 	}
-	// };
-
-	// const validateNumberField = () => {};
-
-	// const validateEmailField = () => {};
-
-	const validateGeneralInfoFields = (e) => {
-		e.preventDefault();
-		handleSubmit(testSubmit);
+	const onSubmit = (data) => {
+		if (formStep === "General Information") setFormStep("Project Details");
+		else if (formStep === "Project Details") {
+			setFormStep("Complete");
+			// sendFormSubmissionEmail();
+		} else return;
 	};
 
 	/**
@@ -123,13 +73,6 @@ const Contact = () => {
 	const sendFormSubmissionEmail = async () => {
 		MessageAPI.processContactForm(formData);
 	};
-
-	const handleFormSubmission = () => {
-		// setFormStep("Complete");
-		// sendFormSubmissionEmail();
-	};
-
-	console.log(errors);
 
 	return (
 		<div className=' flex flex-col justify-between h-screen w-full gap-y-12 items-center overflow-y-scroll'>
@@ -141,7 +84,7 @@ const Contact = () => {
 				</p>
 			</div>
 			{/* General Inquiry Section */}
-			<form className='px-4 h-fit w-full lg:px-160' action='submit'>
+			<form onSubmit={handleSubmit(onSubmit)} className='px-4 h-fit w-full lg:px-160' action='submit'>
 				{!formStep && (
 					<div className='flex flex-col items-center text-center gap-y-12'>
 						<h2 className='content-description'>
@@ -178,7 +121,7 @@ const Contact = () => {
 									/>
 								</div>
 								<div className='form-div'>
-									<label className='text-xl text-white font-light'>*Last Name</label>
+									<label className='text-xl text-white font-light'>Last Name</label>
 									{errors.lastName?.type === "required" && <p role='alert'>Last name is required</p>}
 									<input
 										{...register("lastName", { required: { value: true, message: "Last Name is required" } })}
@@ -207,7 +150,6 @@ const Contact = () => {
 										id='phoneNumber'
 										className='rounded-md w-full bg-white h-8 px-2'
 										type='text'
-										onChange={handleNumberInput}
 										value={formData.number}
 									/>
 								</div>
@@ -222,13 +164,16 @@ const Contact = () => {
 									/>
 								</div>
 								<div className='form-div'>
-									<label className='text-xl text-white font-light'>*Email</label>
+									<label className='text-xl text-white font-light'>Email</label>
 									{errors.email?.type === "required" && <p role='alert'>{errors.email.message}</p>}
 									{errors.email?.type === "pattern" && <p role='alert'>{errors.email.message}</p>}
 									<input
 										{...register("email", {
-											required: {value: true, message: "Email is required"},
-											pattern: {value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "This does not match a valid email address"}
+											required: { value: true, message: "Email is required" },
+											pattern: {
+												value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+												message: "This does not match a valid email address",
+											},
 										})}
 										id='email'
 										className='rounded-md w-full bg-white h-8 px-2'
@@ -241,10 +186,12 @@ const Contact = () => {
 						</div>
 						<div className='flex flex-col gap-y-4 lg:flex-row lg:justify-around'>
 							<ButtonPrimary label='Cancel' type='primary' action={() => setFormStep("")} />
-							<ButtonPrimary label='Next' type='primary' dark={true} action={handleSubmit(testSubmit)} />
+							<ButtonPrimary label='Next' type='primary' dark={true} action={handleSubmit(onSubmit)} />
 						</div>
 					</div>
 				)}
+
+				{/* Project Details Section */}
 				{formStep === "Project Details" && (
 					<div className='bg-primary-dark p-4 rounded-md flex flex-col'>
 						<div className='w-full text-center text-white pt-4'>
@@ -256,7 +203,12 @@ const Contact = () => {
 								<p className='text-xl text-white font-light'>Service Type</p>
 								<div className='flex flex-col [&_label]:text-white gap-y-4 lg:gap-y-0'>
 									<div className='flex gap-x-4 items-center'>
-										<input value='Web Design' onChange={handleInput} type='checkbox' className='size-4'></input>
+										<input
+											value='Web Design'
+											onChange={handleInput}
+											type='checkbox'
+											className='size-4'
+											defaultChecked></input>
 										<label htmlFor=''>Web Design</label>
 									</div>
 									<div className='flex gap-x-4 items-center'>
@@ -290,7 +242,7 @@ const Contact = () => {
 								<label className='text-xl text-white font-light'>Additional Details</label>
 								<textarea
 									onChange={handleInput}
-									className='bg-white rounded-md h-40'
+									className='bg-white rounded-md h-40 p-2'
 									name=''
 									id='projectDetails'></textarea>
 							</div>
@@ -302,9 +254,15 @@ const Contact = () => {
 									dark={true}
 									action={() => setFormStep("General Information")}
 								/>
-								<ButtonPrimary label='Submit' type='primary' dark={true} action={handleFormSubmission} />
+								<ButtonPrimary label='Submit' type='primary' dark={true} action={handleSubmit(onSubmit)} />
 							</div>
 						</div>
+					</div>
+				)}
+
+				{formStep === "Complete" && (
+					<div>
+						<p className="text-2xl text-center font-light">Your inquiry has been sent. Our team will review it and be in touch shortly!</p>
 					</div>
 				)}
 			</form>
