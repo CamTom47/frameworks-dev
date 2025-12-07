@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../styles/components/SliderNav.scss";
 
 const SliderNav = ({ navList }) => {
 	//Initial Selection of the different navs

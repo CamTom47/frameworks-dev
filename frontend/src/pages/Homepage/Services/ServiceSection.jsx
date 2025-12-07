@@ -51,11 +51,11 @@ const ServiceSection = () => {
 		),
 	};
 	return (
-		<div className='service-section'>
-			<div className='header-container'>
-				<h1>Flexible and Intuitive Software Solutions</h1>
-			</div>
-			<div className='service-grid'>
+		<div className='flex flex-col h-fit gap-y-12 pb-40 items-center px-4'>
+			<h1 className='text-wrap text-4xl text-primary-dark font-black text-center'>
+				Flexible and Intuitive Software Solutions
+			</h1>
+			<div className='flex flex-col h-fit items-center gap-y-20 lg:flex-row lg:justify-between lg:gap-x-8'>
 				<ServiceCard
 					title={"Web Design"}
 					description={"Design beautiful websites optimized to gain you maximum exposure and communicate your brand."}

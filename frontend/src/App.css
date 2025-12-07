@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@font-face {
+	font-family: "Manrope";
+	src: url("../src/assets/fonts/Manrope/Manrope-VariableFont_wght.ttf");
+}
+
+@font-face {
+	font-family: "Comfortaa";
+	src: url("../src/assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf");
+}
+@font-face {
+	font-family: "Raleway-VariableFont_wght";
+	src: url("../src/assets/fonts/Raleway/Raleway-VariableFont_wght.ttf");
+}
+
+@font-face {
+	font-family: "Reddit-Sans";
+	src: url("../src/assets/fonts/Reddit_Sans/RedditSans-VariableFont_wght.ttf");
+}
+@font-face {
+	font-family: "Encode-Sans";
+	src: url("../src/assets/fonts/encode_sans/EncodeSans-VariableFont_wdth\,wght.ttf");
+}
+
+.main-app {
+	font-family: Reddit-Sans, sans-serif;
+	height: 100vh;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+@theme {
+	--color-primary: #f27b35;
+	--color-primary-dark: #8c230b;
+	--color-secondary: #5f94d9;
+	--color-background: #ffe3d0;
+	--color-light-gray: #f2f2f2;
+
+	--animate-opennav: opennav 100ms linear;
+
+
+	@keyframes opennav {
+		0% {
+			transform: scaleY(0);
+		}
+		100% {
+			transform: scaleY(100%);
+		}
+	}
+
+}

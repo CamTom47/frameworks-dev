@@ -1,4 +1,3 @@
-import "./styles/app.scss";
 import { Routes, Route } from "react-router";
 import Homepage from "./pages/Homepage/Homepage";
 import AboutPage from "./pages/AboutPage/AboutPage";
@@ -7,6 +6,7 @@ import Footer from "./pages/Footer/Footer";
 import ServicePage from "./pages/ServicePage/ServicePage";
 import Contact from "./pages/Contact/Contact";
 import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
 	return (
@@ -19,7 +19,6 @@ function App() {
 				<Route path='/services/:service_id' element={<ServicePage />} />
 				<Route path='/contact' element={<Contact />} />
 			</Routes>
-			<Footer></Footer>
 		</div>
 	);
 }
