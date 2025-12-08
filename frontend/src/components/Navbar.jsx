@@ -5,9 +5,10 @@ const Navbar = () => {
 	const [navbarHidden, setNavbarHidden] = useState(false);
 	const [screenWidth, setScreenWidth] = useState(window.outerWidth);
 	const [lastScrollStop, setLastScrollStop] = useState(window.screenTop);
-	const [activeNav, setActiveNav] = useState("about");
+	const [activeNav, setActiveNav] = useState("");
 	const [showHambuger, setShowHamburger] = useState(screenWidth <= 430);
 	const [showNav, setShowNav] = useState(false);
+
 
 	const getWindowHeight = () => {
 		if (lastScrollStop < window.scrollY) setNavbarHidden(true);
@@ -18,7 +19,9 @@ const Navbar = () => {
 	window.addEventListener("scroll", getWindowHeight);
 
 	useEffect(() => {
-		setActiveNav(window.location.pathname.split("/")[1]);
+		console.log(window.location.href)
+		const pathname = window.location.pathname.split("/")[1]
+		setActiveNav(pathname ? pathname : '');
 	}, [window.location.pathname]);
 
 	//Get the window width from the window object
